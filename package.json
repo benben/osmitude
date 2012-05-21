@@ -1,0 +1,15 @@
+{
+  "name": "osmitude",
+  "description": "see your current google latitude position on openstreetmap",
+  "author": "Benjamin Knofe <ben@nerdlabor.de>",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": ">=2.5.9",
+    "connect": ">=2.3.0",
+    "connect-auth": ">=0.5.1",
+    "jade": ">=0.26.0"
+  },
+  "engines": {
+    "node": ">=0.6.12"
+  }
+}

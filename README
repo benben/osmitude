@@ -1,0 +1,7 @@
+OSMITUDE
+
+see your google latitude position on openstreetmap
+
+    $ cd /path/to/osmitude
+    $ npm install
+    $ node osmitude
