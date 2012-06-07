@@ -19,6 +19,21 @@
   min-height:100px;
 }
 
-#loc {
+#update {
   font-size:150%;
+}
+
+/* taken from http://www.webtoolkit.info/css-clearfix.html */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+  width:100%;
 }

@@ -1,8 +1,9 @@
 doctype 5
 html(lang="en")
   head
-    title osmitude
+    title 'osmitude - your google latitude position on openstreetmap'
     link(rel='stylesheet', type='text/css', media='screen', href='style.css')
+    link(rel='stylesheet', type='text/css', media='screen', href='leaflet/leaflet.css')
   body
     h1 osmitude
     if( isAuthenticated )
@@ -12,9 +13,12 @@ html(lang="en")
       br
       a(href='#',id='update') Update Location
       br
-      div(id='location')
-      div(id='error')
-      script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
-      script(src='app.js')
+      #wrapper(class='clearfix')
+        #location
+        #error
     else
       a(href='/login') Login
+    #map
+    script(src='leaflet/leaflet.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='app.js')
