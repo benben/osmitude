@@ -2,11 +2,19 @@ doctype 5
 html(lang="en")
   head
     title osmitude
+    link(rel='stylesheet', type='text/css', media='screen', href='style.css')
   body
     h1 osmitude
     if( isAuthenticated )
       p logged in!
       p= user
       a(href='/logout') Logout
+      br
+      a(href='#',id='update') Update Location
+      br
+      div(id='location')
+      div(id='error')
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+      script(src='app.js')
     else
       a(href='/login') Login

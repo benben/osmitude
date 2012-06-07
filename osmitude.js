@@ -7,7 +7,8 @@
 
 var express = require('express')
    ,connect = require('connect')
-   ,auth= require('connect-auth');
+   ,auth= require('connect-auth')
+   rest = require('restler');
 
 //load keys from extra file
 try {
@@ -29,6 +30,7 @@ app.set('view engine', 'jade');
 app.set('view options', {
   layout: false
 });
+app.use(express.static(__dirname + '/public'));
 
 //plug all middlewares in
 app.use(connect.cookieParser('fsd54GD43gdG54Cdf9Olk'))
@@ -64,6 +66,19 @@ app.get('/logout', function(req, res, params) {
 
 app.get("/", function(req, res, params) {
   res.render('index', {isAuthenticated: req.isAuthenticated(), user: JSON.stringify( req.getAuthDetails().user)})
+});
+
+app.get("/location", function(req, res, params) {
+  if(req.isAuthenticated()) {
+    rest.get('https://www.googleapis.com/latitude/v1/currentLocation?access_token=' + req.session.access_token).on('complete', function(result) {
+      if (result instanceof Error) {
+        //TODO: do something useful here
+        console.log('Error: ' + result.message);
+      } else {
+        res.end(JSON.stringify(result.data));
+      }
+    });
+  }
 });
 
 app.listen(3000);

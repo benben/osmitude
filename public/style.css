@@ -1,0 +1,24 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#location {
+  width:40%;
+  border: 1px dashed gray;
+  margin:10px;
+  float:left;
+  min-height:100px;
+}
+
+#error {
+  width:40%;
+  border: 1px solid red;
+  margin:10px;
+  float:left;
+  min-height:100px;
+}
+
+#loc {
+  font-size:150%;
+}
