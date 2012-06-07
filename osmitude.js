@@ -70,7 +70,7 @@ app.get("/", function(req, res, params) {
 
 app.get("/location", function(req, res, params) {
   if(req.isAuthenticated()) {
-    rest.get('https://www.googleapis.com/latitude/v1/currentLocation?access_token=' + req.session.access_token).on('complete', function(result) {
+    rest.get('https://www.googleapis.com/latitude/v1/currentLocation?granularity=best&access_token=' + req.session.access_token).on('complete', function(result) {
       if (result instanceof Error) {
         //TODO: do something useful here
         console.log('Error: ' + result.message);
