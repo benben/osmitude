@@ -10,16 +10,23 @@ var express = require('express')
    ,auth= require('connect-auth')
    rest = require('restler');
 
-//load keys from extra file
-try {
-  var example_keys= require('./key_file.js');
-  for(var key in example_keys) {
-    global[key]= example_keys[key];
+//load keys from extra file if no env vars are set
+
+var google2Id = process.env.GOOGLE2ID
+var google2Secret = process.env.GOOGLE2SECRET
+var google2CallbackAddress = process.env.GOOGLE2CALLBACKADDRESS
+
+if (google2Id === undefined || google2Secret === undefined || google2CallbackAddress === undefined) {
+  try {
+    var example_keys= require('./key_file.js');
+    for(var key in example_keys) {
+      global[key]= example_keys[key];
+    }
   }
-}
-catch(e) {
-  console.log('Unable to locate the key_file.js file.');
-  return;
+  catch(e) {
+    console.log('Unable to locate the key_file.js file.');
+    return;
+  }
 }
 
 //create express app
