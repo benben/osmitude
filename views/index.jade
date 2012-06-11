@@ -5,19 +5,19 @@ html(lang="en")
     link(rel='stylesheet', type='text/css', media='screen', href='style.css')
     link(rel='stylesheet', type='text/css', media='screen', href='leaflet/leaflet.css')
   body
-    h1 osmitude
-    if( isAuthenticated )
-      p logged in!
-      p= user
-      a(href='/logout') Logout
-      br
-      a(href='#',id='update') Update Location
-      br
-      #wrapper(class='clearfix')
-        #location
-        #error
-    else
-      a(href='/login') Login
+    #nav
+      if( isAuthenticated )
+        p logged in!
+        p= user
+        a(href='/logout') Logout
+        br
+        a(href='#',id='update') Update Location
+        br
+        #wrapper(class='clearfix')
+          #location
+          #error
+      else
+        a(href='/login') Login with your Google Account to see your position.
     #map
     script(src='leaflet/leaflet.js')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')

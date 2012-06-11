@@ -1,4 +1,4 @@
-var out = function(message, type) {
+function out(message, type) {
   if(type === 'error') {
     var full_message = '[ERROR] ' + message;
     $('#error').append('<p>' + full_message + '</p>')
@@ -9,12 +9,31 @@ var out = function(message, type) {
   console.log(full_message)
 }
 
-var log = function(message) {
+function log(message) {
   out(message, 'info');
 };
 
-var err = function(message) {
+function err(message) {
   out(message, 'error')
+}
+
+function get_location() {
+  var location;
+
+  $.ajax({
+    url: '/location',
+    type: 'GET',
+    success: function(msg) {
+      location = jQuery.parseJSON(msg);
+      log(msg);
+    },
+    error: function(xhr, ajaxOptions, thrownError){
+      err(xhr.status);
+      err(thrownError);
+    }
+  });
+
+  return location;
 }
 
 $(function (){
@@ -22,12 +41,12 @@ $(function (){
   /* MAP STUFF                          */
   /**************************************/
 
-  $("#map").width($(window).width());
-  $("#map").height($(window).height() - $("#map").offset().top);
+  $('#map').width($(window).width());
+  $('#map').height($(window).height());
 
   $(window).resize(function() {
-    $("#map").width($(window).width());
-    $("#map").height($(window).height() - $("#map").offset().top);
+    $('#map').width($(window).width());
+    $('#map').height($(window).height());
   });
 
   var map = new L.Map('map');
@@ -39,23 +58,16 @@ $(function (){
 
   map.setView(new L.LatLng(51.338, 12.375), 13).addLayer(osm);
 
+  $('.leaflet-control-container').css({position: 'absolute', top: $('#nav').outerHeight() + 'px'});
+
+  /**************************************/
+  /* LOCATION STUFF                     */
+  /**************************************/
+
   $('#update').click(function(ev){
     ev.preventDefault();
-    log("clicked!");
-    $.ajax({
-      url: '/location',
-      type: 'GET',
-      //data: 'access_token='+$('#access_token').text(), // or $('#myform').serializeArray()
-      success: function(msg) {
-        var location = jQuery.parseJSON(msg);
-        console.log(location);
-        log(msg);
-        map.setView(new L.LatLng(location.latitude, location.longitude), 13).addLayer(osm);
-      },
-      error: function(xhr, ajaxOptions, thrownError){
-        err(xhr.status);
-        err(thrownError);
-      }
-    });
+    get_location();
   });
+
+  //map.setView(new L.LatLng(location.latitude, location.longitude), 13).addLayer(osm);
 });
