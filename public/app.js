@@ -27,6 +27,8 @@ $(function (){
     this.accuracy = 0;
   }
 
+  var msg_shown = false;
+
   function update_location() {
     console.log('updating!');
     $.ajax({
@@ -34,6 +36,16 @@ $(function (){
       type: 'GET',
       success: function(msg) {
         l = jQuery.parseJSON(msg);
+        //if user isn't using latitude
+        if(msg === "") {
+          if(!msg_shown) {
+            alert('You are not using latitude with this google account. I will create a fake location. Please enable dev mode to see you moving around!');
+            msg_shown = true;
+          }
+          l = new location();
+          l.latitude = 51.338;
+          l.longitude = 12.375;
+        }
         if(l.latitude != 0) {
           if(dev_mode) {
             var sign = 0;
