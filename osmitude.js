@@ -87,4 +87,5 @@ app.get('*', function(req, res, params) {
   res.redirect('/');
 });
 
-app.listen(3000);
+var port = process.env.PORT || 3000;
+app.listen(port);
