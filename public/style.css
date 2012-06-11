@@ -9,44 +9,17 @@
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   width:100%;
-  padding:20px;
+}
+
+#content {
+  margin:20px;
 }
 
 #nav a {
   color: white;
 }
 
-#location {
-  width:40%;
-  border: 1px dashed gray;
-  margin:10px;
-  float:left;
-  min-height:100px;
-}
-
-#error {
-  width:40%;
-  border: 1px solid red;
-  margin:10px;
-  float:left;
-  min-height:100px;
-}
-
-#update {
-  font-size:150%;
-}
-
-/* taken from http://www.webtoolkit.info/css-clearfix.html */
-.clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
-}
-
-.clearfix {
-  display: inline-block;
-  width:100%;
+#map {
+  width: 100%;
+  height: 100%;
 }

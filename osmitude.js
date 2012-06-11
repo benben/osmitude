@@ -64,11 +64,11 @@ app.get('/logout', function(req, res, params) {
   req.logout(); // Using the 'event' model to do a redirect on logout.
 });
 
-app.get("/", function(req, res, params) {
-  res.render('index', {isAuthenticated: req.isAuthenticated(), user: JSON.stringify( req.getAuthDetails().user)})
+app.get('/', function(req, res, params) {
+  res.render('index', {isAuthenticated: req.isAuthenticated(), user: req.getAuthDetails().user})
 });
 
-app.get("/location", function(req, res, params) {
+app.get('/location', function(req, res, params) {
   if(req.isAuthenticated()) {
     rest.get('https://www.googleapis.com/latitude/v1/currentLocation?granularity=best&access_token=' + req.session.access_token).on('complete', function(result) {
       if (result instanceof Error) {
@@ -78,7 +78,13 @@ app.get("/location", function(req, res, params) {
         res.end(JSON.stringify(result.data));
       }
     });
+  } else {
+    res.redirect('/');
   }
+});
+
+app.get('*', function(req, res, params) {
+  res.redirect('/');
 });
 
 app.listen(3000);

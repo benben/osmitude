@@ -6,18 +6,27 @@ html(lang="en")
     link(rel='stylesheet', type='text/css', media='screen', href='leaflet/leaflet.css')
   body
     #nav
-      if( isAuthenticated )
-        p logged in!
-        p= user
-        a(href='/logout') Logout
-        br
-        a(href='#',id='update') Update Location
-        br
-        #wrapper(class='clearfix')
-          #location
-          #error
-      else
-        a(href='/login') Login with your Google Account to see your position.
+      #content
+        if( isAuthenticated )
+          span Logged in as #{user.name}
+          &nbsp;|&nbsp;
+          a(href='/logout') Logout
+          &nbsp;|&nbsp;
+          a(href='#',id='update_now') Update now
+          &nbsp;|&nbsp;
+          a(href='#',id='update') Toggle Updating
+          &nbsp;|&nbsp;
+          span Updating is&nbsp;
+          span(id='update_status',style='color:green;') ON
+          &nbsp;|&nbsp;
+          a(href='#',id='dev') Toggle Dev Mode
+          &nbsp;|&nbsp;
+          span Dev Mode is&nbsp;
+          span(id='dev_status',style='color:red;') OFF
+          &nbsp;|&nbsp;
+          a(href='#',id='hide') Hide Controls
+        else
+          a(href='/login') Login with your Google Account to see your location.
     #map
     script(src='leaflet/leaflet.js')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
