@@ -11,12 +11,7 @@ var express = require('express')
    rest = require('restler');
 
 //load keys from extra file if no env vars are set
-
-var google2Id = process.env.GOOGLE2ID
-var google2Secret = process.env.GOOGLE2SECRET
-var google2CallbackAddress = process.env.GOOGLE2CALLBACKADDRESS
-
-if (google2Id === undefined || google2Secret === undefined || google2CallbackAddress === undefined) {
+if (process.env.GOOGLE2ID === undefined || process.env.GOOGLE2SECRET === undefined || process.env.GOOGLE2CALLBACKADDRESS === undefined) {
   try {
     var example_keys= require('./key_file.js');
     for(var key in example_keys) {
@@ -27,6 +22,10 @@ if (google2Id === undefined || google2Secret === undefined || google2CallbackAdd
     console.log('Unable to locate the key_file.js file.');
     return;
   }
+} else {
+  google2Id = process.env.GOOGLE2ID;
+  google2Secret = process.env.GOOGLE2SECRET;
+  google2CallbackAddress = process.env.GOOGLE2CALLBACKADDRESS;
 }
 
 //create express app

@@ -84,10 +84,29 @@ $(function (){
     }
   }
 
+  function toggle_hide() {
+    elements_to_hide = ['.leaflet-control-zoom', '.leaflet-control-attribution', '#nav'];
+    if (hidden) {
+      $.each(elements_to_hide, function(index, value) {
+        $(value).show();
+      });
+      hidden = false;
+    } else {
+      $.each(elements_to_hide, function(index, value) {
+        $(value).hide();
+      });
+      hidden = true;
+    }
+  }
+
   var l = new location();
   var marker = new L.Marker(new L.LatLng(51.338, 12.375));
-  var update = null; //setInterval(update_location, 5000);
+  if($('#update').length == 1) {
+    update_location();
+    var update = setInterval(update_location, 5000);
+  }
   var dev_mode = false;
+  var hidden = false;
 
   $('#update').click(function(ev){
     ev.preventDefault();
@@ -102,5 +121,17 @@ $(function (){
   $('#dev').click(function(ev){
     ev.preventDefault();
     toggle_dev();
+  });
+
+  $('#hide').click(function(ev){
+    ev.preventDefault();
+    toggle_hide();
+  });
+
+  $(document).keypress(function(ev) {
+    if (ev.which == 104) {
+      ev.preventDefault();
+      toggle_hide();
+    }
   });
 });
