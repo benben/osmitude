@@ -1,3 +1,9 @@
+var icon_size = 200;
+
+function set_icon_size(size) {
+  icon_size = size;
+}
+
 $(function (){
   $('#map').width($(window).width());
   $('#map').height($(window).height());
@@ -59,7 +65,12 @@ $(function (){
             l.longitude = l.longitude + (Math.random()*size*sign)
           }
           map.removeLayer(marker);
-          marker = new L.Marker(new L.LatLng(l.latitude,l.longitude));
+
+          var LeafIcon = L.Icon.extend({
+            iconSize: new L.Point(icon_size, icon_size)
+          });
+
+          marker = new L.Marker(new L.LatLng(l.latitude,l.longitude), {icon: new LeafIcon('marker.png')});
           map.addLayer(marker);
           map.panTo(new L.LatLng(l.latitude, l.longitude), 13); //.addLayer(osm);
         }
