@@ -64,15 +64,21 @@ $(function (){
             l.latitude = l.latitude + (Math.random()*size*sign)
             l.longitude = l.longitude + (Math.random()*size*sign)
           }
-          map.removeLayer(marker);
 
-          var LeafIcon = L.Icon.extend({
-            iconSize: new L.Point(icon_size, icon_size)
-          });
+          if(l.latitude != old_lat && l.longitude != old_lon) {
+            map.removeLayer(marker);
 
-          marker = new L.Marker(new L.LatLng(l.latitude,l.longitude), {icon: new LeafIcon('marker.png')});
-          map.addLayer(marker);
-          map.panTo(new L.LatLng(l.latitude, l.longitude), 13); //.addLayer(osm);
+            var LeafIcon = L.Icon.extend({
+              iconSize: new L.Point(icon_size, icon_size)
+            });
+
+            marker = new L.Marker(new L.LatLng(l.latitude,l.longitude), {icon: new LeafIcon('marker.png')});
+            map.addLayer(marker);
+            map.panTo(new L.LatLng(l.latitude, l.longitude), 13); //.addLayer(osm);
+
+            var old_lat = l.latitude;
+            var old_lon = l.longitude;
+          }
         }
       },
       error: function(xhr, ajaxOptions, thrownError){
