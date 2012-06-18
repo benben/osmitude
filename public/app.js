@@ -1,4 +1,4 @@
-var icon_size = 200;
+var icon_size = 30;
 
 function set_icon_size(size) {
   icon_size = size;

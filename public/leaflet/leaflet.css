@@ -293,7 +293,7 @@ a.leaflet-active {
 /* Visual appearance */
 
 .leaflet-container {
-	background: #ddd;
+	background: #000;
 	}
 .leaflet-container a {
 	color: #0078A8;
